@@ -45,9 +45,7 @@ const Header = () => {
       </div>
 
       {/* Main Header */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
-      }`} style={{ top: isScrolled ? '0' : '40px' }}>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md transition-all duration-300" style={{ top: isScrolled ? '0' : '40px' }}>
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
@@ -65,9 +63,7 @@ const Header = () => {
                 <a
                   key={item.href}
                   href={item.href}
-                  className={`font-medium transition-colors duration-300 hover:text-primary ${
-                    isScrolled ? 'text-foreground' : 'text-white'
-                  }`}
+                  className="font-medium text-foreground transition-colors duration-300 hover:text-primary"
                 >
                   {item.label}
                 </a>
@@ -89,9 +85,7 @@ const Header = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`lg:hidden p-2 rounded-md transition-colors ${
-                isScrolled ? 'text-foreground' : 'text-white'
-              }`}
+              className="lg:hidden p-2 rounded-md text-foreground transition-colors"
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
