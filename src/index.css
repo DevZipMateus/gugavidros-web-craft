@@ -8,7 +8,7 @@
 @layer base {
   :root {
     /* Primary Colors - Azul Corporativo */
-    --primary: 210 100% 30%; /* #0066cc - Azul principal */
+    --primary: 218 47% 28%; /* #233a66 - Novo azul principal */
     --primary-foreground: 0 0% 100%; /* Branco */
     
     /* Secondary Colors - Vermelho destaque */
@@ -16,56 +16,56 @@
     --secondary-foreground: 0 0% 100%; /* Branco */
     
     /* Accent Colors */
-    --accent: 210 40% 96%; /* Azul muito claro */
-    --accent-foreground: 210 100% 20%; /* Azul escuro */
+    --accent: 218 20% 96%; /* Azul muito claro */
+    --accent-foreground: 218 47% 20%; /* Azul escuro */
     
     /* Glass/Transparency Effects */
-    --glass: 210 100% 95%; /* Background translúcido */
-    --glass-border: 210 20% 80%; /* Borda sutil */
+    --glass: 218 47% 95%; /* Background translúcido */
+    --glass-border: 218 20% 80%; /* Borda sutil */
     
     /* Neutral Colors */
     --background: 0 0% 100%; /* Branco puro */
-    --foreground: 210 11% 15%; /* Texto principal */
-    --muted: 210 40% 98%; /* Background suave */
-    --muted-foreground: 210 6% 46%; /* Texto secundário */
+    --foreground: 218 11% 15%; /* Texto principal */
+    --muted: 218 20% 98%; /* Background suave */
+    --muted-foreground: 218 6% 46%; /* Texto secundário */
     
     /* Status & Interaction */
-    --border: 210 20% 88%;
-    --input: 210 20% 88%;
-    --ring: 210 100% 30%;
+    --border: 218 20% 88%;
+    --input: 218 20% 88%;
+    --ring: 218 47% 28%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
     
     /* Cards & Surfaces */
     --card: 0 0% 100%;
-    --card-foreground: 210 11% 15%;
+    --card-foreground: 218 11% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 210 11% 15%;
+    --popover-foreground: 218 11% 15%;
     
     /* Gradients */
-    --hero-gradient: linear-gradient(135deg, hsl(210 100% 30%) 0%, hsl(210 100% 40%) 100%);
+    --hero-gradient: linear-gradient(135deg, hsl(218 47% 28%) 0%, hsl(218 47% 38%) 100%);
     --glass-gradient: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-    --section-gradient: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 40% 98%) 100%);
+    --section-gradient: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(218 20% 98%) 100%);
     
     --radius: 0.75rem;
   }
 
   .dark {
-    --background: 210 11% 15%;
+    --background: 218 11% 15%;
     --foreground: 0 0% 98%;
-    --primary: 210 100% 40%;
+    --primary: 218 47% 38%;
     --primary-foreground: 0 0% 100%;
     --secondary: 0 84% 50%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 210 11% 18%;
-    --muted-foreground: 210 6% 60%;
-    --accent: 210 11% 18%;
+    --muted: 218 11% 18%;
+    --muted-foreground: 218 6% 60%;
+    --accent: 218 11% 18%;
     --accent-foreground: 0 0% 98%;
-    --border: 210 20% 25%;
-    --input: 210 20% 25%;
-    --card: 210 11% 18%;
+    --border: 218 20% 25%;
+    --input: 218 20% 25%;
+    --card: 218 11% 18%;
     --card-foreground: 0 0% 98%;
-    --popover: 210 11% 18%;
+    --popover: 218 11% 18%;
     --popover-foreground: 0 0% 98%;
   }
 }
