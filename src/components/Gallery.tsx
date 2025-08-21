@@ -158,7 +158,7 @@ const Gallery = () => {
                 src={selectedImage}
                 alt="Trabalho GUGAVIDROS - Visualização ampliada"
                 className="w-full h-full object-contain rounded-lg"
-                style={{ imageRendering: 'high-quality' }}
+                style={{ imageRendering: 'auto' }}
               />
               <button
                 onClick={handleCloseModal}
