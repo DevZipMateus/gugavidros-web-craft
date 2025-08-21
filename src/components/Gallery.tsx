@@ -1,6 +1,7 @@
 
-import { useState } from 'react';
-import { Eye, Plus } from 'lucide-react';
+import { useState, useCallback, useMemo } from 'react';
+import { Plus } from 'lucide-react';
+import LazyImage from './LazyImage';
 
 const Gallery = () => {
   // All images from the galeria folder
@@ -40,28 +41,49 @@ const Gallery = () => {
     '/lovable-uploads/galeria/35.jpg',
   ];
 
-  const [visibleImages, setVisibleImages] = useState(10); // Show 2 rows (10 images) initially
+  const [visibleImages, setVisibleImages] = useState(6); // Start with fewer images
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
 
-  const loadMoreImages = () => {
-    setVisibleImages(prev => Math.min(prev + 10, galleryImages.length));
-  };
+  const loadMoreImages = useCallback(() => {
+    setVisibleImages(prev => Math.min(prev + 6, galleryImages.length)); // Load 6 at a time instead of 10
+  }, [galleryImages.length]);
 
-  const handleImageError = (imageSrc: string) => {
+  const handleImageError = useCallback((imageSrc: string) => {
     console.log(`Failed to load image: ${imageSrc}`);
     setFailedImages(prev => new Set([...prev, imageSrc]));
-  };
+  }, []);
 
-  const handleImageLoad = (imageSrc: string) => {
+  const handleImageLoad = useCallback((imageSrc: string) => {
     console.log(`Successfully loaded image: ${imageSrc}`);
-  };
+    setLoadedImages(prev => new Set([...prev, imageSrc]));
+  }, []);
+
+  const handleImageClick = useCallback((image: string) => {
+    if (!failedImages.has(image)) {
+      setSelectedImage(image);
+    }
+  }, [failedImages]);
+
+  const handleCloseModal = useCallback(() => {
+    setSelectedImage(null);
+  }, []);
 
   const hasMoreImages = visibleImages < galleryImages.length;
-  const workingImages = galleryImages.filter(img => !failedImages.has(img));
+  const workingImages = useMemo(() => 
+    galleryImages.filter(img => !failedImages.has(img)), 
+    [galleryImages, failedImages]
+  );
+
+  const loadingProgress = useMemo(() => {
+    const visibleCount = Math.min(visibleImages, galleryImages.length);
+    const loadedCount = loadedImages.size;
+    return visibleCount > 0 ? Math.round((loadedCount / visibleCount) * 100) : 0;
+  }, [visibleImages, galleryImages.length, loadedImages.size]);
 
   return (
-    <section id="galeria" className="py-20 bg-gradient-to-b from-white to-muted">
+    <section id="galeria" className="py-20 bg-gradient-to-b from-background to-muted">
       <div className="container mx-auto px-4">
         {/* Section Title */}
         <div className="text-center mb-12">
@@ -69,47 +91,47 @@ const Gallery = () => {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Confira alguns dos nossos trabalhos realizados em vidraçaria, serralheria e esquadrias de alumínio
           </p>
+          
+          {/* Loading Progress - Only show during initial load */}
+          {loadedImages.size < visibleImages && visibleImages <= 6 && (
+            <div className="mt-4 max-w-xs mx-auto">
+              <div className="text-sm text-muted-foreground mb-2">
+                Carregando imagens... {loadingProgress}%
+              </div>
+              <div className="w-full bg-muted rounded-full h-2">
+                <div 
+                  className="bg-primary h-2 rounded-full transition-all duration-500"
+                  style={{ width: `${loadingProgress}%` }}
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Debug Info - Remove in production */}
         {failedImages.size > 0 && (
-          <div className="mb-4 p-4 bg-red-100 text-red-700 rounded-lg">
-            <p>Imagens que falharam ao carregar ({failedImages.size}):</p>
-            <ul className="text-sm">
+          <div className="mb-4 p-4 bg-destructive/10 text-destructive rounded-lg">
+            <p className="font-medium">Imagens que falharam ao carregar ({failedImages.size}):</p>
+            <div className="text-sm mt-2 max-h-32 overflow-y-auto">
               {Array.from(failedImages).map((img, index) => (
-                <li key={index}>• {img}</li>
+                <div key={index} className="truncate">• {img}</div>
               ))}
-            </ul>
+            </div>
           </div>
         )}
 
         {/* Image Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mb-8">
           {galleryImages.slice(0, visibleImages).map((image, index) => (
-            <div
-              key={index}
-              className="group relative aspect-square overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
-              onClick={() => setSelectedImage(image)}
-            >
-              <img
-                src={image}
-                alt={`Trabalho GUGAVIDROS ${index + 1}`}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                loading="lazy"
-                onError={() => handleImageError(image)}
-                onLoad={() => handleImageLoad(image)}
-              />
-              {failedImages.has(image) && (
-                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                  <span className="text-gray-500 text-sm">Imagem não disponível</span>
-                </div>
-              )}
-              {!failedImages.has(image) && (
-                <div className="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <Eye className="w-8 h-8 text-white" />
-                </div>
-              )}
-            </div>
+            <LazyImage
+              key={`${image}-${index}`}
+              src={image}
+              alt={`Trabalho GUGAVIDROS ${index + 1}`}
+              index={index}
+              onClick={() => handleImageClick(image)}
+              onError={handleImageError}
+              onLoad={handleImageLoad}
+            />
           ))}
         </div>
 
@@ -121,7 +143,7 @@ const Gallery = () => {
               className="btn-hero inline-flex items-center gap-2"
             >
               <Plus className="w-5 h-5" />
-              Ver Mais ({Math.min(10, galleryImages.length - visibleImages)} imagens)
+              Ver Mais ({Math.min(6, galleryImages.length - visibleImages)} imagens)
             </button>
           </div>
         )}
@@ -130,17 +152,18 @@ const Gallery = () => {
         {selectedImage && !failedImages.has(selectedImage) && (
           <div
             className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
-            onClick={() => setSelectedImage(null)}
+            onClick={handleCloseModal}
           >
             <div className="relative max-w-4xl max-h-[90vh] w-full">
               <img
                 src={selectedImage}
                 alt="Trabalho GUGAVIDROS - Visualização ampliada"
                 className="w-full h-full object-contain rounded-lg"
+                style={{ imageRendering: 'optimizeQuality' }}
               />
               <button
-                onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-colors"
+                onClick={handleCloseModal}
+                className="absolute top-4 right-4 w-10 h-10 bg-background/20 hover:bg-background/30 rounded-full flex items-center justify-center text-white transition-colors"
               >
                 ✕
               </button>
