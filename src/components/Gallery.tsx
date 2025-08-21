@@ -1,3 +1,4 @@
+
 import { useState, useCallback, useMemo } from 'react';
 import { Plus } from 'lucide-react';
 import LazyImage from './LazyImage';
@@ -40,13 +41,13 @@ const Gallery = () => {
     '/lovable-uploads/galeria/35.jpg',
   ];
 
-  const [visibleImages, setVisibleImages] = useState(6); // Start with fewer images
+  const [visibleImages, setVisibleImages] = useState(6);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
 
   const loadMoreImages = useCallback(() => {
-    setVisibleImages(prev => Math.min(prev + 6, galleryImages.length)); // Load 6 at a time instead of 10
+    setVisibleImages(prev => Math.min(prev + 6, galleryImages.length));
   }, [galleryImages.length]);
 
   const handleImageError = useCallback((imageSrc: string) => {
@@ -107,7 +108,7 @@ const Gallery = () => {
           )}
         </div>
 
-        {/* Debug Info - Remove in production */}
+        {/* Debug Info */}
         {failedImages.size > 0 && (
           <div className="mb-4 p-4 bg-destructive/10 text-destructive rounded-lg">
             <p className="font-medium">Imagens que falharam ao carregar ({failedImages.size}):</p>
@@ -118,6 +119,11 @@ const Gallery = () => {
             </div>
           </div>
         )}
+
+        {/* Stats */}
+        <div className="mb-4 text-center text-sm text-muted-foreground">
+          Carregadas: {loadedImages.size} | Falharam: {failedImages.size} | Total visível: {visibleImages}
+        </div>
 
         {/* Image Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mb-8">

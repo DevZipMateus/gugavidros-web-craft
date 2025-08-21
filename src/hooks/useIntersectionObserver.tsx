@@ -10,7 +10,7 @@ interface UseIntersectionObserverOptions {
 export const useIntersectionObserver = (
   options: UseIntersectionObserverOptions = {}
 ) => {
-  const { threshold = 0.1, rootMargin = '50px', triggerOnce = true } = options;
+  const { threshold = 0.1, rootMargin = '200px', triggerOnce = false } = options;
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [hasTriggered, setHasTriggered] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -28,7 +28,12 @@ export const useIntersectionObserver = (
           setHasTriggered(true);
         }
       },
-      { threshold, rootMargin }
+      { 
+        threshold, 
+        rootMargin,
+        // Add root for better performance
+        root: null
+      }
     );
 
     observer.observe(element);
@@ -38,5 +43,8 @@ export const useIntersectionObserver = (
     };
   }, [threshold, rootMargin, triggerOnce, hasTriggered]);
 
-  return { ref, isIntersecting: triggerOnce ? (isIntersecting || hasTriggered) : isIntersecting };
+  return { 
+    ref, 
+    isIntersecting: triggerOnce ? (isIntersecting || hasTriggered) : isIntersecting 
+  };
 };
