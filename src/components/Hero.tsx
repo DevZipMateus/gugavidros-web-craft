@@ -1,5 +1,6 @@
 
 import { ArrowRight, Shield, Award, Users } from 'lucide-react';
+import GalleryButton from './GalleryButton';
 
 const Hero = () => {
   return (
@@ -76,6 +77,9 @@ const Hero = () => {
               Nossos Serviços
             </a>
           </div>
+
+          {/* Gallery Button */}
+          <GalleryButton />
         </div>
       </div>
 
