@@ -16,30 +16,29 @@ interface LazyImageProps {
 const LazyImage = ({ src, alt, index, onClick, onError, onLoad }: LazyImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
   const { ref, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
-    rootMargin: '200px', // Increased margin for better preloading
+    rootMargin: '200px',
   });
 
-  // Start loading immediately when intersecting
+  // Start loading when intersecting
   useEffect(() => {
-    if (isIntersecting && !isLoaded && !hasError && !isLoading) {
-      setIsLoading(true);
+    if (isIntersecting && !shouldLoad && !hasError) {
+      console.log(`Starting to load image: ${src}`);
+      setShouldLoad(true);
     }
-  }, [isIntersecting, isLoaded, hasError, isLoading]);
+  }, [isIntersecting, shouldLoad, hasError, src]);
 
   const handleLoad = () => {
     console.log(`Successfully loaded image: ${src}`);
     setIsLoaded(true);
-    setIsLoading(false);
     onLoad(src);
   };
 
   const handleError = () => {
     console.log(`Failed to load image: ${src}`);
     setHasError(true);
-    setIsLoading(false);
     onError(src);
   };
 
@@ -49,18 +48,13 @@ const LazyImage = ({ src, alt, index, onClick, onError, onLoad }: LazyImageProps
       className="group relative aspect-square overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1 will-change-transform"
       onClick={() => !hasError && onClick()}
     >
-      {/* Loading skeleton when not intersecting */}
-      {!isIntersecting && (
-        <Skeleton className="w-full h-full" />
-      )}
-      
-      {/* Show skeleton while loading */}
-      {isIntersecting && isLoading && !isLoaded && !hasError && (
+      {/* Show skeleton while not intersecting or while loading */}
+      {(!isIntersecting || (shouldLoad && !isLoaded && !hasError)) && (
         <Skeleton className="w-full h-full" />
       )}
 
-      {/* Load image when intersecting */}
-      {isIntersecting && isLoading && (
+      {/* Load image when should load */}
+      {shouldLoad && !hasError && (
         <img
           src={src}
           alt={alt}
