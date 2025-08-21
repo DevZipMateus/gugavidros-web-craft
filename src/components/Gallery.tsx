@@ -42,12 +42,23 @@ const Gallery = () => {
 
   const [visibleImages, setVisibleImages] = useState(10); // Show 2 rows (10 images) initially
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
 
   const loadMoreImages = () => {
     setVisibleImages(prev => Math.min(prev + 10, galleryImages.length));
   };
 
+  const handleImageError = (imageSrc: string) => {
+    console.log(`Failed to load image: ${imageSrc}`);
+    setFailedImages(prev => new Set([...prev, imageSrc]));
+  };
+
+  const handleImageLoad = (imageSrc: string) => {
+    console.log(`Successfully loaded image: ${imageSrc}`);
+  };
+
   const hasMoreImages = visibleImages < galleryImages.length;
+  const workingImages = galleryImages.filter(img => !failedImages.has(img));
 
   return (
     <section id="galeria" className="py-20 bg-gradient-to-b from-white to-muted">
@@ -59,6 +70,18 @@ const Gallery = () => {
             Confira alguns dos nossos trabalhos realizados em vidraçaria, serralheria e esquadrias de alumínio
           </p>
         </div>
+
+        {/* Debug Info - Remove in production */}
+        {failedImages.size > 0 && (
+          <div className="mb-4 p-4 bg-red-100 text-red-700 rounded-lg">
+            <p>Imagens que falharam ao carregar ({failedImages.size}):</p>
+            <ul className="text-sm">
+              {Array.from(failedImages).map((img, index) => (
+                <li key={index}>• {img}</li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {/* Image Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
@@ -73,10 +96,19 @@ const Gallery = () => {
                 alt={`Trabalho GUGAVIDROS ${index + 1}`}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 loading="lazy"
+                onError={() => handleImageError(image)}
+                onLoad={() => handleImageLoad(image)}
               />
-              <div className="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <Eye className="w-8 h-8 text-white" />
-              </div>
+              {failedImages.has(image) && (
+                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
+                  <span className="text-gray-500 text-sm">Imagem não disponível</span>
+                </div>
+              )}
+              {!failedImages.has(image) && (
+                <div className="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <Eye className="w-8 h-8 text-white" />
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -95,7 +127,7 @@ const Gallery = () => {
         )}
 
         {/* Modal/Lightbox */}
-        {selectedImage && (
+        {selectedImage && !failedImages.has(selectedImage) && (
           <div
             className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
             onClick={() => setSelectedImage(null)}
