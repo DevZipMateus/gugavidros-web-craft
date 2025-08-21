@@ -77,10 +77,35 @@
   
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    /* Smooth scroll behavior */
+    scroll-behavior: smooth;
+    /* Prevent scroll anchoring issues */
+    overflow-anchor: none;
   }
   
   html {
+    /* Smooth scroll behavior */
     scroll-behavior: smooth;
+    /* Prevent layout shifts during scrolling */
+    scroll-padding-top: 100px;
+  }
+
+  /* Optimize images for better performance */
+  img {
+    /* Prevent layout shifts */
+    height: auto;
+    /* Optimize rendering */
+    image-rendering: auto;
+  }
+
+  /* Optimize transforms */
+  .will-change-transform {
+    will-change: transform;
+  }
+
+  /* Remove will-change after animations */
+  .transform:not(:hover):not(:focus) {
+    will-change: auto;
   }
 }
 
@@ -100,6 +125,8 @@
   
   .service-card {
     @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1;
+    /* Contain layout changes */
+    contain: layout style;
   }
   
   .btn-hero {
@@ -158,6 +185,9 @@
   z-index: 1000;
   transition: all 0.3s ease;
   animation: pulse 2s infinite;
+  /* Optimize for transforms */
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .whatsapp-float:hover {
@@ -175,4 +205,16 @@
   100% {
     box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
   }
+}
+
+/* Gallery optimizations */
+.gallery-grid {
+  /* Prevent layout shifts in gallery */
+  contain: layout;
+}
+
+.gallery-item {
+  /* Optimize individual gallery items */
+  contain: layout style;
+  backface-visibility: hidden;
 }

@@ -1,8 +1,7 @@
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { Eye } from 'lucide-react';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import { Skeleton } from '@/components/ui/skeleton';
 
 interface LazyImageProps {
   src: string;
@@ -13,31 +12,30 @@ interface LazyImageProps {
   onLoad: (src: string) => void;
 }
 
-const LazyImage = ({ src, alt, index, onClick, onError, onLoad }: LazyImageProps) => {
+const LazyImage = memo(({ src, alt, index, onClick, onError, onLoad }: LazyImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [shouldLoad, setShouldLoad] = useState(false);
+  
   const { ref, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
-    rootMargin: '200px',
+    rootMargin: '100px', // Reduced for better performance
+    triggerOnce: true, // Only trigger once to prevent re-renders
   });
 
   // Start loading when intersecting
   useEffect(() => {
     if (isIntersecting && !shouldLoad && !hasError) {
-      console.log(`Starting to load image: ${src}`);
       setShouldLoad(true);
     }
-  }, [isIntersecting, shouldLoad, hasError, src]);
+  }, [isIntersecting, shouldLoad, hasError]);
 
   const handleLoad = () => {
-    console.log(`Successfully loaded image: ${src}`);
     setIsLoaded(true);
     onLoad(src);
   };
 
   const handleError = () => {
-    console.log(`Failed to load image: ${src}`);
     setHasError(true);
     onError(src);
   };
@@ -45,28 +43,29 @@ const LazyImage = ({ src, alt, index, onClick, onError, onLoad }: LazyImageProps
   return (
     <div
       ref={ref}
-      className="group relative aspect-square overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1 will-change-transform"
+      className="group relative aspect-square overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer will-change-transform"
+      style={{
+        minHeight: '200px', // Fixed minimum height to prevent layout shifts
+        contain: 'layout style', // Contain layout changes
+      }}
       onClick={() => !hasError && onClick()}
     >
-      {/* Show skeleton while not intersecting or while loading */}
-      {(!isIntersecting || (shouldLoad && !isLoaded && !hasError)) && (
-        <Skeleton className="w-full h-full" />
-      )}
+      {/* Background placeholder to maintain dimensions */}
+      <div className="absolute inset-0 bg-muted animate-pulse" />
 
       {/* Load image when should load */}
       {shouldLoad && !hasError && (
         <img
           src={src}
           alt={alt}
-          className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-110 ${
-            isLoaded ? 'opacity-100' : 'opacity-0 absolute inset-0'
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 transform group-hover:scale-110 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           loading="lazy"
           onLoad={handleLoad}
           onError={handleError}
           style={{
-            imageRendering: 'auto',
-            transform: 'translate3d(0, 0, 0)',
+            backfaceVisibility: 'hidden', // Optimize for transforms
           }}
         />
       )}
@@ -88,6 +87,8 @@ const LazyImage = ({ src, alt, index, onClick, onError, onLoad }: LazyImageProps
       )}
     </div>
   );
-};
+});
+
+LazyImage.displayName = 'LazyImage';
 
 export default LazyImage;

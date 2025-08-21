@@ -25,8 +25,10 @@ const Header = () => {
 
   return (
     <>
-      {/* Top Bar */}
-      <div className="bg-primary text-white py-2 px-4">
+      {/* Top Bar - Fixed height to prevent layout shifts */}
+      <div className={`bg-primary text-white py-2 px-4 transition-all duration-300 ${
+        isScrolled ? 'h-0 overflow-hidden opacity-0' : 'h-10 opacity-100'
+      }`}>
         <div className="container mx-auto flex justify-between items-center text-sm">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
@@ -44,8 +46,8 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Main Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md transition-all duration-300" style={{ top: isScrolled ? '0' : '40px' }}>
+      {/* Main Header - Fixed position without dynamic top changes */}
+      <header className="sticky top-0 left-0 right-0 z-50 bg-white shadow-md transition-all duration-300 will-change-transform">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}

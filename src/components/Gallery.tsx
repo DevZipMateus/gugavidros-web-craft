@@ -51,12 +51,10 @@ const Gallery = () => {
   }, [galleryImages.length]);
 
   const handleImageError = useCallback((imageSrc: string) => {
-    console.log(`Failed to load image: ${imageSrc}`);
     setFailedImages(prev => new Set([...prev, imageSrc]));
   }, []);
 
   const handleImageLoad = useCallback((imageSrc: string) => {
-    console.log(`Successfully loaded image: ${imageSrc}`);
     setLoadedImages(prev => new Set([...prev, imageSrc]));
   }, []);
 
@@ -71,11 +69,6 @@ const Gallery = () => {
   }, []);
 
   const hasMoreImages = visibleImages < galleryImages.length;
-  const workingImages = useMemo(() => 
-    galleryImages.filter(img => !failedImages.has(img)), 
-    [galleryImages, failedImages]
-  );
-
   const loadingProgress = useMemo(() => {
     const visibleCount = Math.min(visibleImages, galleryImages.length);
     const loadedCount = loadedImages.size;
@@ -108,25 +101,13 @@ const Gallery = () => {
           )}
         </div>
 
-        {/* Debug Info */}
-        {failedImages.size > 0 && (
-          <div className="mb-4 p-4 bg-destructive/10 text-destructive rounded-lg">
-            <p className="font-medium">Imagens que falharam ao carregar ({failedImages.size}):</p>
-            <div className="text-sm mt-2 max-h-32 overflow-y-auto">
-              {Array.from(failedImages).map((img, index) => (
-                <div key={index} className="truncate">• {img}</div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Stats */}
-        <div className="mb-4 text-center text-sm text-muted-foreground">
-          Carregadas: {loadedImages.size} | Falharam: {failedImages.size} | Total visível: {visibleImages}
-        </div>
-
-        {/* Image Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mb-8">
+        {/* Image Grid - Fixed grid with stable dimensions */}
+        <div 
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mb-8"
+          style={{
+            contain: 'layout', // Contain layout changes to this grid
+          }}
+        >
           {galleryImages.slice(0, visibleImages).map((image, index) => (
             <LazyImage
               key={`${image}-${index}`}
@@ -158,13 +139,17 @@ const Gallery = () => {
           <div
             className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
             onClick={handleCloseModal}
+            style={{ contain: 'layout style' }}
           >
             <div className="relative max-w-4xl max-h-[90vh] w-full">
               <img
                 src={selectedImage}
                 alt="Trabalho GUGAVIDROS - Visualização ampliada"
                 className="w-full h-full object-contain rounded-lg"
-                style={{ imageRendering: 'auto' }}
+                style={{ 
+                  imageRendering: 'auto',
+                  backfaceVisibility: 'hidden',
+                }}
               />
               <button
                 onClick={handleCloseModal}
