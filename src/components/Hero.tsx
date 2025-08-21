@@ -5,8 +5,14 @@ import GalleryButton from './GalleryButton';
 const Hero = () => {
   return (
     <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background with Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-primary/80"></div>
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url(/lovable-uploads/5a96a1e9-3154-4bef-b9ed-0bbd3e926746.png)' }}
+      ></div>
+      
+      {/* Background with Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/70 to-primary/60"></div>
       
       {/* Geometric Pattern Overlay */}
       <div className="absolute inset-0 opacity-10">
