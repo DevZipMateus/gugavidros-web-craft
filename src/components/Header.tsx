@@ -1,10 +1,13 @@
 
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, Mail } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,6 +17,35 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleNavigation = (href: string) => {
+    // Close mobile menu
+    setIsMenuOpen(false);
+    
+    // If it's a section link (starts with #)
+    if (href.startsWith('#')) {
+      // If we're not on the home page, navigate to home first
+      if (location.pathname !== '/') {
+        navigate('/');
+        // Wait for navigation to complete, then scroll to section
+        setTimeout(() => {
+          const element = document.querySelector(href);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        // We're already on home page, just scroll to section
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    } else {
+      // It's a regular route, navigate normally
+      navigate(href);
+    }
+  };
 
   const menuItems = [
     { href: '#inicio', label: 'Início' },
@@ -53,23 +85,25 @@ const Header = () => {
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <div className="flex items-center">
-              <img 
-                src="/lovable-uploads/6b7daadc-31c4-43f8-84cf-6bbc0709fe36.png" 
-                alt="GUGAVIDROS - Vidros e Esquadrias de Alumínio"
-                className="h-12 w-auto"
-              />
+              <button onClick={() => handleNavigation('/')}>
+                <img 
+                  src="/lovable-uploads/6b7daadc-31c4-43f8-84cf-6bbc0709fe36.png" 
+                  alt="GUGAVIDROS - Vidros e Esquadrias de Alumínio"
+                  className="h-12 w-auto"
+                />
+              </button>
             </div>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-8">
               {menuItems.map((item) => (
-                <a
+                <button
                   key={item.href}
-                  href={item.href}
+                  onClick={() => handleNavigation(item.href)}
                   className="font-medium text-foreground transition-colors duration-300 hover:text-primary"
                 >
                   {item.label}
-                </a>
+                </button>
               ))}
             </nav>
 
@@ -101,14 +135,13 @@ const Header = () => {
             <div className="container mx-auto px-4 py-4">
               <nav className="flex flex-col space-y-4">
                 {menuItems.map((item) => (
-                  <a
+                  <button
                     key={item.href}
-                    href={item.href}
-                    className="text-foreground font-medium py-2 border-b border-border"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => handleNavigation(item.href)}
+                    className="text-foreground font-medium py-2 border-b border-border text-left"
                   >
                     {item.label}
-                  </a>
+                  </button>
                 ))}
                 <a
                   href="https://wa.me/5512996403219"
