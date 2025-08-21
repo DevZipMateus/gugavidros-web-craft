@@ -66,7 +66,7 @@ const LazyImage = ({ src, alt, index, onClick, onError, onLoad }: LazyImageProps
             onLoad={handleLoad}
             onError={handleError}
             style={{
-              imageRendering: 'optimizeQuality',
+              imageRendering: 'high-quality',
               transform: 'translate3d(0, 0, 0)',
             }}
           />

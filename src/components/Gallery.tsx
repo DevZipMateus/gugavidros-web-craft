@@ -1,4 +1,3 @@
-
 import { useState, useCallback, useMemo } from 'react';
 import { Plus } from 'lucide-react';
 import LazyImage from './LazyImage';
@@ -159,7 +158,7 @@ const Gallery = () => {
                 src={selectedImage}
                 alt="Trabalho GUGAVIDROS - Visualização ampliada"
                 className="w-full h-full object-contain rounded-lg"
-                style={{ imageRendering: 'optimizeQuality' }}
+                style={{ imageRendering: 'high-quality' }}
               />
               <button
                 onClick={handleCloseModal}
