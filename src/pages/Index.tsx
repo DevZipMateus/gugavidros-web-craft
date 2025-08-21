@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
+import Gallery from '@/components/Gallery';
 import About from '@/components/About';
 import Services from '@/components/Services';
 import Differentials from '@/components/Differentials';
@@ -76,6 +77,7 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
+        <Gallery />
         <About />
         <Services />
         <Differentials />
