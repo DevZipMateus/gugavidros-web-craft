@@ -87,8 +87,8 @@ const Hero = () => {
           </div>
 
           {/* Video */}
-          <div className="animate-fade-in hidden lg:block" style={{ animationDelay: '0.3s' }}>
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+          <div className="animate-fade-in hidden lg:flex justify-center" style={{ animationDelay: '0.3s' }}>
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-md">
               <video
                 autoPlay
                 loop
