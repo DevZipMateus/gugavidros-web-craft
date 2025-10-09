@@ -32,38 +32,38 @@ const Contact = () => {
   return (
     <section id="contato" className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="section-title animate-fade-in">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="section-title animate-fade-in text-3xl sm:text-4xl">
             Entre em Contato
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <p className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.2s' }}>
             Estamos prontos para desenvolver a solução ideal para seu projeto
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Contact Information */}
           <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <h3 className="text-2xl font-bold text-primary mb-8">
+            <h3 className="text-xl sm:text-2xl font-bold text-primary mb-6 sm:mb-8">
               Fale Conosco
             </h3>
             
-            <div className="space-y-6 mb-8">
+            <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
               {contactInfo.map((item, index) => (
-                <div key={index} className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                <div key={index} className="flex items-start gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
                     <div className="text-primary">
                       {item.icon}
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-1">{item.title}</h4>
+                    <h4 className="font-semibold text-foreground mb-1 text-sm sm:text-base">{item.title}</h4>
                     {item.link.startsWith('#') ? (
-                      <p className="text-muted-foreground">{item.info}</p>
+                      <p className="text-muted-foreground text-sm sm:text-base">{item.info}</p>
                     ) : (
                       <a 
                         href={item.link}
-                        className="text-primary hover:text-primary/80 transition-colors"
+                        className="text-primary hover:text-primary/80 transition-colors text-sm sm:text-base break-all"
                       >
                         {item.info}
                       </a>
@@ -74,13 +74,13 @@ const Contact = () => {
             </div>
 
             {/* Service Areas */}
-            <div className="bg-muted rounded-xl p-6">
-              <h4 className="font-bold text-primary mb-4">Área de Atendimento</h4>
-              <p className="text-muted-foreground mb-4">
+            <div className="bg-muted rounded-xl p-4 sm:p-6">
+              <h4 className="font-bold text-primary mb-3 sm:mb-4 text-sm sm:text-base">Área de Atendimento</h4>
+              <p className="text-muted-foreground mb-3 sm:mb-4 text-sm sm:text-base">
                 Localizados no Litoral Norte de São Paulo, atendemos em todo o Estado de São Paulo.
               </p>
-              <div className="flex items-center gap-2 text-sm text-primary font-medium">
-                <MapPin className="w-4 h-4" />
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-primary font-medium">
+                <MapPin className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                 <span>Cobertura: Todo o Estado de São Paulo</span>
               </div>
             </div>
@@ -88,49 +88,49 @@ const Contact = () => {
 
           {/* CTA Section */}
           <div className="animate-slide-in" style={{ animationDelay: '0.4s' }}>
-            <div className="bg-gradient-to-br from-primary to-primary/90 rounded-2xl p-8 text-white">
-              <h3 className="text-2xl font-bold mb-6 text-center">
+            <div className="bg-gradient-to-br from-primary to-primary/90 rounded-2xl p-6 sm:p-8 text-white">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center">
                 Solicite seu Orçamento
               </h3>
-              <p className="text-white/90 mb-8 text-center leading-relaxed">
+              <p className="text-sm sm:text-base text-white/90 mb-6 sm:mb-8 text-center leading-relaxed">
                 Nossa equipe está pronta para atendê-lo e desenvolver a solução 
                 ideal para seu projeto em vidraçaria e serralheria.
               </p>
 
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <a
                   href="https://wa.me/5512996403219"
-                  className="w-full bg-secondary hover:bg-secondary/90 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3"
+                  className="w-full bg-secondary hover:bg-secondary/90 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <MessageSquare className="w-5 h-5" />
+                  <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5" />
                   Falar pelo WhatsApp
                 </a>
                 
                 <a
                   href="tel:+5512996403219"
-                  className="w-full bg-white/10 text-white border-2 border-white/60 hover:bg-white hover:text-primary font-semibold py-4 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-3"
+                  className="w-full bg-white/10 text-white border-2 border-white/60 hover:bg-white hover:text-primary font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base"
                 >
-                  <Phone className="w-5 h-5" />
+                  <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
                   Ligar Agora
                 </a>
 
                 <a
                   href="mailto:gugavidros@hotmail.com"
-                  className="w-full bg-white/10 text-white border-2 border-white/60 hover:bg-white hover:text-primary font-semibold py-4 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-3"
+                  className="w-full bg-white/10 text-white border-2 border-white/60 hover:bg-white hover:text-primary font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base"
                 >
-                  <Mail className="w-5 h-5" />
+                  <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                   Enviar E-mail
                 </a>
               </div>
 
-              <div className="mt-8 p-4 bg-white/10 rounded-lg text-center">
+              <div className="mt-6 sm:mt-8 p-3 sm:p-4 bg-white/10 rounded-lg text-center">
                 <div className="flex items-center justify-center gap-2 mb-2">
-                  <Clock className="w-4 h-4" />
-                  <span className="text-sm font-medium">Resposta Rápida</span>
+                  <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm font-medium">Resposta Rápida</span>
                 </div>
-                <p className="text-sm text-white/80">
+                <p className="text-xs sm:text-sm text-white/80">
                   Retornamos seu contato em até 24 horas
                 </p>
               </div>

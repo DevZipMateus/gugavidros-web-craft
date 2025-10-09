@@ -45,43 +45,43 @@ const Services = () => {
     <section id="servicos" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="section-title animate-fade-in">
+          <h2 className="section-title animate-fade-in text-3xl sm:text-4xl">
             Nossos Serviços
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <p className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.2s' }}>
             Soluções completas em vidraçaria e serralheria com qualidade garantida
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, index) => (
             <div 
               key={index}
-              className="service-card p-8 animate-fade-in"
+              className="service-card p-6 sm:p-8 animate-fade-in"
               style={{ animationDelay: `${0.3 + (index * 0.1)}s` }}
             >
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 sm:mb-6">
                 <div className="text-primary">
                   {service.icon}
                 </div>
               </div>
               
-              <h3 className="text-xl font-bold text-primary mb-4">{service.title}</h3>
-              <p className="text-muted-foreground mb-6 leading-relaxed">{service.description}</p>
+              <h3 className="text-lg sm:text-xl font-bold text-primary mb-3 sm:mb-4">{service.title}</h3>
+              <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 leading-relaxed">{service.description}</p>
               
               <ul className="space-y-2">
                 {service.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <div className="w-1.5 h-1.5 bg-secondary rounded-full"></div>
+                  <li key={featureIndex} className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-secondary rounded-full flex-shrink-0"></div>
                     {feature}
                   </li>
                 ))}
               </ul>
               
-              <div className="mt-6 pt-6 border-t border-border">
+              <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-border">
                 <a
                   href="https://wa.me/5512996403219"
-                  className="text-primary font-medium hover:text-primary/80 transition-colors inline-flex items-center gap-2"
+                  className="text-primary font-medium hover:text-primary/80 transition-colors inline-flex items-center gap-2 text-sm sm:text-base"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -93,18 +93,18 @@ const Services = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-primary to-primary/90 rounded-2xl p-8 md:p-12 text-white animate-fade-in" style={{ animationDelay: '0.8s' }}>
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">
+        <div className="mt-12 sm:mt-16 text-center">
+          <div className="bg-gradient-to-r from-primary to-primary/90 rounded-2xl p-6 sm:p-8 md:p-12 text-white animate-fade-in" style={{ animationDelay: '0.8s' }}>
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 px-4">
               Precisa de um Orçamento Personalizado?
             </h3>
-            <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-white/90 max-w-2xl mx-auto px-4">
               Nossa equipe está pronta para desenvolver a solução ideal para seu projeto
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
               <a
                 href="https://wa.me/5512996403219"
-                className="bg-secondary hover:bg-secondary/90 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105"
+                className="bg-secondary hover:bg-secondary/90 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -112,7 +112,7 @@ const Services = () => {
               </a>
               <a
                 href="mailto:gugavidros@hotmail.com"
-                className="bg-white/10 text-white border-2 border-white/60 hover:bg-white hover:text-primary font-semibold px-8 py-4 rounded-lg transition-all duration-300"
+                className="bg-white/10 text-white border-2 border-white/60 hover:bg-white hover:text-primary font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-300 text-sm sm:text-base"
               >
                 Enviar E-mail
               </a>

@@ -60,20 +60,20 @@ const Header = () => {
     <>
       {/* Top Bar - Fixed height to prevent layout shifts */}
       <div className={`bg-primary text-white py-2 px-4 transition-all duration-300 ${
-        isScrolled ? 'h-0 overflow-hidden opacity-0' : 'h-10 opacity-100'
+        isScrolled ? 'h-0 overflow-hidden opacity-0' : 'h-auto opacity-100'
       }`}>
-        <div className="container mx-auto flex justify-between items-center text-sm">
-          <div className="flex items-center gap-4">
+        <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm gap-2 sm:gap-0">
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
             <div className="flex items-center gap-2">
-              <Phone className="w-4 h-4" />
+              <Phone className="w-3 h-3 sm:w-4 sm:h-4" />
               <span>(12) 99640-3219</span>
             </div>
             <div className="flex items-center gap-2">
-              <Mail className="w-4 h-4" />
-              <span>gugavidros@hotmail.com</span>
+              <Mail className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="truncate max-w-[200px] sm:max-w-none">gugavidros@hotmail.com</span>
             </div>
           </div>
-          <div className="hidden md:block text-sm">
+          <div className="hidden sm:block text-xs sm:text-sm">
             @GUGAVIDROS2014
           </div>
         </div>
@@ -89,7 +89,7 @@ const Header = () => {
                 <img 
                   src="/lovable-uploads/6b7daadc-31c4-43f8-84cf-6bbc0709fe36.png" 
                   alt="GUGAVIDROS - Vidros e Esquadrias de Alumínio"
-                  className="h-12 w-auto"
+                  className="h-10 sm:h-12 w-auto"
                 />
               </button>
             </div>

@@ -19,23 +19,23 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Text Content */}
-          <div className="text-center lg:text-left text-white">
+          <div className="text-center lg:text-left text-white order-2 lg:order-1">
             {/* Main Heading */}
-            <h1 className="hero-text mb-6 animate-fade-in">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 animate-fade-in">
               GUGAVIDROS
             </h1>
             
             {/* Tagline */}
-            <p className="text-xl md:text-2xl mb-4 text-white/90 animate-fade-in" style={{
+            <p className="text-lg sm:text-xl md:text-2xl mb-3 sm:mb-4 text-white/90 animate-fade-in" style={{
             animationDelay: '0.2s'
           }}>
               Transparência que Reflete Qualidade
             </p>
             
             {/* Description */}
-            <p className="text-lg md:text-xl mb-8 leading-relaxed text-white/80 animate-fade-in" style={{
+            <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 leading-relaxed text-white/80 animate-fade-in px-4 lg:px-0" style={{
             animationDelay: '0.4s'
           }}>
               Há mais de 15 anos atuando no mercado de vidraçaria e serralheria, 
@@ -43,41 +43,41 @@ const Hero = () => {
             </p>
 
             {/* Stats */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-6 mb-12 animate-fade-in" style={{
+            <div className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-6 mb-8 sm:mb-12 animate-fade-in px-4 lg:px-0" style={{
             animationDelay: '0.6s'
           }}>
-              <div className="flex items-center gap-3 glass-effect p-4 rounded-lg">
-                <Award className="w-8 h-8 text-secondary" />
+              <div className="flex items-center gap-2 sm:gap-3 glass-effect p-3 sm:p-4 rounded-lg">
+                <Award className="w-6 h-6 sm:w-8 sm:h-8 text-secondary flex-shrink-0" />
                 <div className="text-left">
-                  <div className="text-2xl font-bold">15+</div>
-                  <div className="text-sm text-white/80">Anos de Experiência</div>
+                  <div className="text-xl sm:text-2xl font-bold">15+</div>
+                  <div className="text-xs sm:text-sm text-white/80">Anos de Experiência</div>
                 </div>
               </div>
-              <div className="flex items-center gap-3 glass-effect p-4 rounded-lg">
-                <Shield className="w-8 h-8 text-secondary" />
+              <div className="flex items-center gap-2 sm:gap-3 glass-effect p-3 sm:p-4 rounded-lg">
+                <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-secondary flex-shrink-0" />
                 <div className="text-left">
-                  <div className="text-2xl font-bold">100%</div>
-                  <div className="text-sm text-white/80">Qualidade Garantida</div>
+                  <div className="text-xl sm:text-2xl font-bold">100%</div>
+                  <div className="text-xs sm:text-sm text-white/80">Qualidade Garantida</div>
                 </div>
               </div>
-              <div className="flex items-center gap-3 glass-effect p-4 rounded-lg">
-                <Users className="w-8 h-8 text-secondary" />
+              <div className="flex items-center gap-2 sm:gap-3 glass-effect p-3 sm:p-4 rounded-lg">
+                <Users className="w-6 h-6 sm:w-8 sm:h-8 text-secondary flex-shrink-0" />
                 <div className="text-left">
-                  <div className="text-2xl font-bold">SP</div>
-                  <div className="text-sm text-white/80">Todo o Estado</div>
+                  <div className="text-xl sm:text-2xl font-bold">SP</div>
+                  <div className="text-xs sm:text-sm text-white/80">Todo o Estado</div>
                 </div>
               </div>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in" style={{
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in px-4 lg:px-0" style={{
             animationDelay: '0.8s'
           }}>
-              <a href="https://wa.me/5512996403219" className="btn-hero inline-flex items-center gap-2" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/5512996403219" className="btn-hero inline-flex items-center justify-center gap-2 text-sm sm:text-base" target="_blank" rel="noopener noreferrer">
                 Solicitar Orçamento
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
-              <a href="#servicos" className="btn-outline inline-flex items-center gap-2">
+              <a href="#servicos" className="btn-outline inline-flex items-center justify-center gap-2 text-sm sm:text-base">
                 Nossos Serviços
               </a>
             </div>
@@ -87,8 +87,8 @@ const Hero = () => {
           </div>
 
           {/* Video */}
-          <div className="animate-fade-in hidden lg:flex justify-center" style={{ animationDelay: '0.3s' }}>
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-md">
+          <div className="animate-fade-in order-1 lg:order-2 px-4 lg:px-0" style={{ animationDelay: '0.3s' }}>
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-sm sm:max-w-md mx-auto lg:max-w-none">
               <video
                 autoPlay
                 loop

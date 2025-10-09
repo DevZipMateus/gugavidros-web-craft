@@ -40,10 +40,10 @@ const About = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16">
           {/* Video */}
           <div className="animate-fade-in order-2 lg:order-1" style={{ animationDelay: '0.3s' }}>
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-lg mx-auto lg:max-w-none">
               <video
                 autoPlay
                 loop
@@ -59,15 +59,15 @@ const About = () => {
 
           {/* Content */}
           <div className="animate-fade-in order-1 lg:order-2" style={{ animationDelay: '0.4s' }}>
-            <h3 className="text-2xl font-bold text-primary mb-6">
+            <h3 className="text-xl sm:text-2xl font-bold text-primary mb-4 sm:mb-6">
               Tradição e Qualidade em Cada Projeto
             </h3>
-            <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+            <p className="text-base sm:text-lg text-muted-foreground mb-4 sm:mb-6 leading-relaxed">
               A GUGAVIDROS é uma vidraçaria e serralheria que atua há mais de 15 anos no mercado, 
               com ampla visão sobre o segmento. Localizada no Litoral Norte de São Paulo, 
               atendemos em todo o Estado de São Paulo.
             </p>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
               Nossa equipe possui profissionais altamente qualificados desde a produção até a 
               finalização do projeto. Trabalhamos com produtos de alta qualidade, proporcionando 
               à obra um acabamento incrível e duradouro.
@@ -81,8 +81,8 @@ const About = () => {
                   className="flex items-center gap-3 animate-fade-in"
                   style={{ animationDelay: `${0.5 + (index * 0.1)}s` }}
                 >
-                  <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span className="text-foreground">{feature}</span>
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
+                  <span className="text-sm sm:text-base text-foreground">{feature}</span>
                 </div>
               ))}
             </div>
