@@ -41,8 +41,24 @@ const About = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+          {/* Video */}
+          <div className="animate-fade-in order-2 lg:order-1" style={{ animationDelay: '0.3s' }}>
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+                style={{ pointerEvents: 'none' }}
+              >
+                <source src="/lovable-uploads/novas/video2.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+
           {/* Content */}
-          <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
+          <div className="animate-fade-in order-1 lg:order-2" style={{ animationDelay: '0.4s' }}>
             <h3 className="text-2xl font-bold text-primary mb-6">
               Tradição e Qualidade em Cada Projeto
             </h3>
@@ -69,33 +85,6 @@ const About = () => {
                   <span className="text-foreground">{feature}</span>
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* Visual Element */}
-          <div className="animate-slide-in" style={{ animationDelay: '0.4s' }}>
-            <div className="relative">
-              <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-8 text-white">
-                <div className="text-center mb-8">
-                  <div className="text-5xl font-bold mb-2">15+</div>
-                  <div className="text-xl">Anos de Experiência</div>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4 text-center">
-                  <div className="bg-white/10 rounded-lg p-4">
-                    <div className="text-2xl font-bold">100%</div>
-                    <div className="text-sm">SP Atendido</div>
-                  </div>
-                  <div className="bg-white/10 rounded-lg p-4">
-                    <div className="text-2xl font-bold">24h</div>
-                    <div className="text-sm">Resposta Rápida</div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-8 h-8 bg-secondary rounded-full opacity-80"></div>
-              <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-secondary rounded-full opacity-60"></div>
             </div>
           </div>
         </div>

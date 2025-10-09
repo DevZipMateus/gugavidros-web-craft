@@ -19,69 +19,88 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center text-white">
-          {/* Main Heading */}
-          <h1 className="hero-text mb-6 animate-fade-in">
-            GUGAVIDROS
-          </h1>
-          
-          {/* Tagline */}
-          <p className="text-xl md:text-2xl mb-4 text-white/90 animate-fade-in" style={{
-          animationDelay: '0.2s'
-        }}>
-            Transparência que Reflete Qualidade
-          </p>
-          
-          {/* Description */}
-          <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto leading-relaxed text-white/80 animate-fade-in" style={{
-          animationDelay: '0.4s'
-        }}>
-            Há mais de 15 anos atuando no mercado de vidraçaria e serralheria, 
-            oferecemos soluções completas em esquadrias de alumínio e vidros para todo o Estado de São Paulo.
-          </p>
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
+          {/* Text Content */}
+          <div className="text-center lg:text-left text-white">
+            {/* Main Heading */}
+            <h1 className="hero-text mb-6 animate-fade-in">
+              GUGAVIDROS
+            </h1>
+            
+            {/* Tagline */}
+            <p className="text-xl md:text-2xl mb-4 text-white/90 animate-fade-in" style={{
+            animationDelay: '0.2s'
+          }}>
+              Transparência que Reflete Qualidade
+            </p>
+            
+            {/* Description */}
+            <p className="text-lg md:text-xl mb-8 leading-relaxed text-white/80 animate-fade-in" style={{
+            animationDelay: '0.4s'
+          }}>
+              Há mais de 15 anos atuando no mercado de vidraçaria e serralheria, 
+              oferecemos soluções completas em esquadrias de alumínio e vidros para todo o Estado de São Paulo.
+            </p>
 
-          {/* Stats */}
-          <div className="flex flex-wrap justify-center gap-8 mb-12 animate-fade-in" style={{
-          animationDelay: '0.6s'
-        }}>
-            <div className="flex items-center gap-3 glass-effect p-4 rounded-lg">
-              <Award className="w-8 h-8 text-secondary" />
-              <div className="text-left">
-                <div className="text-2xl font-bold">15+</div>
-                <div className="text-sm text-white/80">Anos de Experiência</div>
+            {/* Stats */}
+            <div className="flex flex-wrap justify-center lg:justify-start gap-6 mb-12 animate-fade-in" style={{
+            animationDelay: '0.6s'
+          }}>
+              <div className="flex items-center gap-3 glass-effect p-4 rounded-lg">
+                <Award className="w-8 h-8 text-secondary" />
+                <div className="text-left">
+                  <div className="text-2xl font-bold">15+</div>
+                  <div className="text-sm text-white/80">Anos de Experiência</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 glass-effect p-4 rounded-lg">
+                <Shield className="w-8 h-8 text-secondary" />
+                <div className="text-left">
+                  <div className="text-2xl font-bold">100%</div>
+                  <div className="text-sm text-white/80">Qualidade Garantida</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 glass-effect p-4 rounded-lg">
+                <Users className="w-8 h-8 text-secondary" />
+                <div className="text-left">
+                  <div className="text-2xl font-bold">SP</div>
+                  <div className="text-sm text-white/80">Todo o Estado</div>
+                </div>
               </div>
             </div>
-            <div className="flex items-center gap-3 glass-effect p-4 rounded-lg">
-              <Shield className="w-8 h-8 text-secondary" />
-              <div className="text-left">
-                <div className="text-2xl font-bold">100%</div>
-                <div className="text-sm text-white/80">Qualidade Garantida</div>
-              </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in" style={{
+            animationDelay: '0.8s'
+          }}>
+              <a href="https://wa.me/5512996403219" className="btn-hero inline-flex items-center gap-2" target="_blank" rel="noopener noreferrer">
+                Solicitar Orçamento
+                <ArrowRight className="w-5 h-5" />
+              </a>
+              <a href="#servicos" className="btn-outline inline-flex items-center gap-2">
+                Nossos Serviços
+              </a>
             </div>
-            <div className="flex items-center gap-3 glass-effect p-4 rounded-lg">
-              <Users className="w-8 h-8 text-secondary" />
-              <div className="text-left">
-                <div className="text-2xl font-bold">SP</div>
-                <div className="text-sm text-white/80">Todo o Estado</div>
-              </div>
-            </div>
+
+            {/* Gallery Button */}
+            <GalleryButton />
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{
-          animationDelay: '0.8s'
-        }}>
-            <a href="https://wa.me/5512996403219" className="btn-hero inline-flex items-center gap-2" target="_blank" rel="noopener noreferrer">
-              Solicitar Orçamento
-              <ArrowRight className="w-5 h-5" />
-            </a>
-            <a href="#servicos" className="btn-outline inline-flex items-center gap-2">
-              Nossos Serviços
-            </a>
+          {/* Video */}
+          <div className="animate-fade-in hidden lg:block" style={{ animationDelay: '0.3s' }}>
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+                style={{ pointerEvents: 'none' }}
+              >
+                <source src="/lovable-uploads/novas/video1.mp4" type="video/mp4" />
+              </video>
+            </div>
           </div>
-
-          {/* Gallery Button */}
-          <GalleryButton />
         </div>
       </div>
 
